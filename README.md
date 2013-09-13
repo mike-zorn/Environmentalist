@@ -4,6 +4,13 @@ Environmentalist
 Configure your .Net application via environment variables in a manner where
 you're not calling ``Environment.GetEnvironmentVariable`` all over the place.
 
+Installation
+============
+Install via nuget
+``
+PM> Install-Package Environmentalist
+``
+
 Usage
 =====
 
