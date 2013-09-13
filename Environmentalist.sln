@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Environmentalist.Tests", "Environmentalist.Tests\Environmentalist.Tests.csproj", "{D673F8C8-5281-4B08-85EF-3E3F25D71DCA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Environmentalist", "Environmentalist\Environmentalist.csproj", "{DDCDED74-6707-45AA-8AD8-4C79FF4E2340}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D673F8C8-5281-4B08-85EF-3E3F25D71DCA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D673F8C8-5281-4B08-85EF-3E3F25D71DCA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D673F8C8-5281-4B08-85EF-3E3F25D71DCA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D673F8C8-5281-4B08-85EF-3E3F25D71DCA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DDCDED74-6707-45AA-8AD8-4C79FF4E2340}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DDCDED74-6707-45AA-8AD8-4C79FF4E2340}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DDCDED74-6707-45AA-8AD8-4C79FF4E2340}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DDCDED74-6707-45AA-8AD8-4C79FF4E2340}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
