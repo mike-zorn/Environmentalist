@@ -6,7 +6,7 @@ using NUnit.Framework;
 namespace Environmentalist.Tests
 {
     [TestFixture]
-    public class EnvironmentalistTests
+    public class ConfiguratorTests
     {
         public interface ITestConfig
         {
@@ -33,7 +33,7 @@ namespace Environmentalist.Tests
         {
             Environment.SetEnvironmentVariable("COOL_PROPERTY", "rofl");
 
-            var config = Environmentalist.Create<ITestConfig>(new DefaultTestConfig());
+            var config = Configurator.Create<ITestConfig>(new DefaultTestConfig());
 
             Assert.That(config.CoolProperty, Is.EqualTo("rofl"));
         }
@@ -41,7 +41,7 @@ namespace Environmentalist.Tests
         [Test]
         public void Create_should_get_a_valid_Config_from_defaults()
         {
-            var config = Environmentalist.Create<ITestConfig>(new DefaultTestConfig());
+            var config = Configurator.Create<ITestConfig>(new DefaultTestConfig());
 
             Assert.That(config.CoolProperty, Is.EqualTo("lol"));
         }

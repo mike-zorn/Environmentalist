@@ -24,7 +24,7 @@ Create an instance
 ------------------
 Create an instance of your configuration via
 ```c#
-var config = Environmentalist.Create<ITestConfig>(new
+var config = Configurator.Create<ITestConfig>(new
     {
         CoolProperty = "foo"
     }
@@ -36,4 +36,7 @@ a given variable in the environment
 
 ???
 ---
-Environmentalist doesn't assume anything about how you use your configuration. You can just pop the returned object into your IoC container of choice or wrap it in a singleton or static class if you want to use an API closer to the standard way of doing config.
+Environmentalist doesn't assume anything about how you use your configuration.
+You can just pop the returned object into your IoC container of choice or wrap
+it in a singleton or static class if you want to use an API closer to the
+standard way of doing config.
