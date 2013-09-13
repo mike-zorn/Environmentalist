@@ -9,7 +9,7 @@ using Castle.Components.DictionaryAdapter;
 
 namespace Environmentalist
 {
-    public static class Configurator
+    public static class Environmentalist
     {
         public static TConfig Create<TConfig>(object @default)
         {
