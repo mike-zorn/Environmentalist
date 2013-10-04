@@ -1,6 +1,8 @@
 Environmentalist
 ================
 
+[![Build Status](http://teamcity.codebetter.com/app/rest/builds/buildType:%28id:bt1100%29/statusIcon)](http://teamcity.codebetter.com/viewType.html?buildTypeId=bt1100&guest=1)
+
 Configure your .Net application via environment variables in a manner where
 you're not calling ``Environment.GetEnvironmentVariable`` all over the place.
 
