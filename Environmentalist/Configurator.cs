@@ -2,8 +2,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using Castle.Components.DictionaryAdapter;
+using Newtonsoft.Json;
 
 [assembly : InternalsVisibleTo("Environmentalist.Tests")]
 
@@ -13,8 +15,9 @@ namespace Environmentalist
     {
         public static TConfig Create<TConfig>(object @default)
         {
-            var propertyNames = Ancillary.GetPropertyNames(typeof (TConfig));
-            var dict = Ancillary.BuildDictionary(propertyNames, @default);
+            var configType = typeof (TConfig);
+            var propertyNames = Ancillary.GetPropertyNames(configType);
+            var dict = Ancillary.BuildDictionary(propertyNames, @default, configType);
             return new DictionaryAdapterFactory().GetAdapter<TConfig>(dict);
         }
     }
@@ -49,19 +52,46 @@ namespace Environmentalist
                         ToDictionary(ma => ma.Member.Name, ma => ma.Attribute.VariableName);
         }
 
-        private static string GetPropertyValue(this object src, string propertyName)
+        private static object DeserializePropertyValue(string value, string propertyName, Type containingType)
         {
-            return (string) src.GetType().GetProperty(propertyName).GetValue(src);
+            var propertyType = GetPropertyType(propertyName, containingType);
+            if (value == null)
+            {
+                return null;
+            }
+            else if (propertyType  == typeof (string))
+            {
+                return value;
+            }
+            else
+            {
+                return JsonConvert.DeserializeObject(value, propertyType);
+            }
         }
 
-        public static IDictionary BuildDictionary(IDictionary<string, string> propertyNames, object defaultConfig)
+        private static Type GetPropertyType(string propertyName, Type containingType)
+        {
+            return containingType.GetMember(propertyName).
+                                  Where(member =>
+                                        member.MemberType == MemberTypes.Property).
+                                  Cast<PropertyInfo>().
+                                  Select(property => property.PropertyType).
+                                  Single();
+        }
+
+        private static object GetPropertyValue(this object src, string propertyName)
+        {
+            return src.GetType().GetProperty(propertyName).GetValue(src);
+        }
+
+        public static IDictionary BuildDictionary(IDictionary<string, string> propertyNames, object defaultConfig, Type type)
         {
             return propertyNames.
                 Select(pair => new
                     {
                         Property = pair.Key,
                         Value =
-                                   Environment.GetEnvironmentVariable(pair.Value) ??
+                                   DeserializePropertyValue(Environment.GetEnvironmentVariable(pair.Value), pair.Key, type) ??
                                    defaultConfig.GetPropertyValue(pair.Key)
                     }).
                 ToDictionary(pv => pv.Property, pv => pv.Value);
