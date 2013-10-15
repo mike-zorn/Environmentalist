@@ -22,6 +22,9 @@ Define your configuration via an interface. E.g.,
 ```c#
 public interface ITestConfig
 {
+    [FromEnvironment("COOL_DICTIONARY")]
+    IDictionary<string, string> CoolDictionary { get; }
+
     [FromEnvironment("COOL_PROPERTY")]
     string CoolProperty { get; }
 }
@@ -35,13 +38,15 @@ Create an instance of your configuration via
 ```c#
 var config = Configurator.Create<ITestConfig>(new
     {
+	CoolDictionary = new Dictionary<string, string>(),
         CoolProperty = "foo"
     }
 );
 ```
 
 The supplied object serves as a set of defaults if Environmentalist can't find
-a given variable in the environment
+a given variable in the environment. Properties which aren't strings are
+automatically deserialized from the enviroment as JSON.
 
 ???
 ---
